@@ -125,7 +125,9 @@ function Bulletins() {
       .filter(b => !lang || b.language === lang)
       .sort(
         (a, b) =>
-          a.starts_at.localeCompare(b.starts_at) || ORDER.indexOf(a.language) - ORDER.indexOf(b.language),
+          b.date.localeCompare(a.date) || // newest day first, then the day's own running order
+          a.starts_at.localeCompare(b.starts_at) ||
+          ORDER.indexOf(a.language) - ORDER.indexOf(b.language),
       );
     Promise.all(chosen.map(b => api<Bulletin>(`/bulletins/${encodeURIComponent(b.id)}`)))
       .then(full => live && setBulletins(full))
@@ -156,7 +158,17 @@ function Bulletins() {
       </p>
       <ErrorNote error={error || loadError} />
       {!bulletins && !error && !loadError ? <Loading what="bulletins" /> : null}
-      {bulletins?.map(b => <BulletinCard key={b.id} bulletin={b} station={station} />)}
+      {bulletins?.map((b, i) => (
+        <div key={b.id}>
+          {/* Runs from several days can be on disk at once; say which day you are listening to. */}
+          {i === 0 || b.date !== bulletins[i - 1].date ? (
+            <h2 style={{ marginTop: 26 }}>
+              {new Date(b.date + "T00:00:00").toLocaleDateString(undefined, { weekday: "long", day: "numeric", month: "long" })}
+            </h2>
+          ) : null}
+          <BulletinCard bulletin={b} station={station} />
+        </div>
+      ))}
       {bulletins && !bulletins.length ? <p className="muted">No bulletins yet.</p> : null}
     </main>
   );

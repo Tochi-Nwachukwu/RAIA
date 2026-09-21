@@ -1,0 +1,229 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>RAIA - Radio AI Africa</title>
+<style>
+  /* Print to PDF: Chrome → Print → Landscape → Save as PDF → tick "Background graphics". */
+  @page { size: 297mm 167mm; margin: 0; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #000; color: #e9f3f8;
+         font: 16px/1.5 "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; }
+  .slide { width: 297mm; height: 167mm; padding: 18mm 20mm; page-break-after: always; position: relative;
+           display: flex; flex-direction: column; justify-content: center; overflow: hidden; }
+  .slide:last-child { page-break-after: auto; }
+  h1 { font-size: 54px; line-height: 1.05; margin: 0 0 12px; letter-spacing: -.02em; }
+  h2 { font-size: 34px; line-height: 1.15; margin: 0 0 18px; letter-spacing: -.01em; }
+  p, li { font-size: 19px; color: #b9d3e0; max-width: 62ch; }
+  strong { color: #e9f3f8; }
+  .lede { font-size: 24px; color: #9ec6da; max-width: 55ch; }
+  .eyebrow { font-family: ui-monospace, Menlo, monospace; font-size: 13px; letter-spacing: .18em;
+             color: #6eafdb; margin-bottom: 14px; }
+  .grid { display: grid; grid-template-columns: 1fr 1fr; gap: 26px; align-items: start; }
+  .card { border-left: 3px solid #34729b; padding: 4px 0 4px 16px; }
+  .card h3 { margin: 0 0 6px; font-size: 20px; color: #c9ebed; }
+  .card p { font-size: 17px; margin: 0; }
+  .big { font-family: ui-monospace, Menlo, monospace; font-size: 46px; color: #6dc1d0; line-height: 1; }
+  .stat { display: flex; gap: 28px; flex-wrap: wrap; margin-top: 10px; }
+  .stat div { min-width: 150px; }
+  .stat span { display: block; font-size: 14px; color: #7ea4b7; margin-top: 6px; }
+  .stat span.big { font-size: 46px; color: #6dc1d0; margin-top: 0; }  /* beats .stat span */
+  .flow { font-family: ui-monospace, Menlo, monospace; font-size: 15px; color: #9ec6da; line-height: 1.9;
+          border: 1px solid #143240; border-radius: 8px; padding: 14px 18px; background: #04090d; }
+  .flow b { color: #6dc1d0; font-weight: 600; }
+  .never { border: 1px solid #143240; border-radius: 10px; padding: 16px 20px; background: #04090d; }
+  .never li { margin: 7px 0; font-size: 18px; }
+  img { border-radius: 8px; border: 1px solid #143240; width: 100%; }
+  .foot { position: absolute; left: 20mm; bottom: 10mm; font-family: ui-monospace, Menlo, monospace;
+          font-size: 12px; color: #4d6c7d; letter-spacing: .04em; }
+  .warm { color: #c76b5a; }
+  .aqua { color: #6dc1d0; }
+  .sky { color: #6eafdb; }
+</style>
+</head>
+<body>
+
+<section class="slide">
+  <div class="eyebrow">OSF × ANDELA · INFORMATION YOU CAN TRUST</div>
+  <h1>RAIA — Radio AI Africa</h1>
+  <p class="lede">A civic radio station produced by AI agents, where every sentence that goes on air
+    traces back to a named source you can check — and everything the station refused to air is
+    published beside what it did.</p>
+  <div class="stat" style="margin-top:26px">
+    <div><span class="big">5</span><span>languages on air</span></div>
+    <div><span class="big">28</span><span>verified outlets</span></div>
+    <div><span class="big">26</span><span>stories refused today</span></div>
+  </div>
+  <div class="foot">Track: Transparency &amp; Accountability · with Stability &amp; Social Cohesion, and Safety &amp; Protection</div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">THE PROBLEM</div>
+  <h2>Civic information assumes a reader.<br>Radio assumes nothing.</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>Reach</h3>
+      <p>Dashboards, portals and PDFs assume a smartphone, data, literacy, and English. Radio reaches
+        people while they work, in the language they think in, on the cheapest device in the house.</p>
+    </div>
+    <div class="card">
+      <h3>Trust</h3>
+      <p>A station that invents a date, a figure or a hotline number does more damage than one that
+        stays silent. Generative tools make broadcast cheap — and make being confidently wrong
+        cheap too.</p>
+    </div>
+  </div>
+  <p style="margin-top:26px"><strong>So the question was never “can a model write a bulletin?”</strong>
+    It was: <strong class="sky">what has to be true in the code before a machine is allowed to say
+    something out loud?</strong></p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">WHO IT IS FOR</div>
+  <h2>Two users, one station</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>The listener</h3>
+      <p>Someone who wants to know what an institution decided this week, what it means for them, and
+        what they can do about it — in Hausa, Yoruba, Igbo, Pidgin or English. They press one button
+        and drop into whatever is on air, the way you tune a dial.</p>
+    </div>
+    <div class="card">
+      <h3>The newsroom</h3>
+      <p>A small civic team — one editor, no studio — who sets the day's programme on a calendar,
+        reads what the agents wrote, edits a script, and presses Generate. Overnight the station
+        builds the next day by itself.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">WHAT IT DOES</div>
+  <h2>From a feed to a voice, with a veto in the middle</h2>
+  <div class="flow">
+    sources → extract → cluster → <b>verify</b> → edit → script → continuity → translate<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;→ diacritics → <b>GATE</b> → render (TTS) → measure → assemble → schedule → publish
+  </div>
+  <p style="margin-top:22px">Sixteen stages, each checkpointed and re-runnable. Bulletins air on a
+    fixed clock from measured durations, so everyone listening in a language hears the same sentence
+    at the same moment. Nothing slow happens while a listener waits: the day is rendered in advance.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">THE IDEA THAT MAKES IT TRUSTWORTHY</div>
+  <h2>Models do the language.<br>Code does the facts.</h2>
+  <div class="never">
+    <p style="margin:0 0 10px; color:#7ea4b7">In this system a language model <strong class="warm">never</strong>:</p>
+    <ul>
+      <li>resolves a contradiction between sources — deterministic rules do</li>
+      <li>touches a timestamp — durations come from <span class="aqua">ffprobe</span>, the schedule is arithmetic</li>
+      <li>invents a number, a quote, a URL or a hotline — each is checked against its source</li>
+      <li>overrides the safety gate — sensitive stories wait for a human, with no override flag</li>
+    </ul>
+  </div>
+  <p style="margin-top:20px">Models write and translate. Everything a listener could be harmed by is
+    decided in code that can be read, tested, and pointed at.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">PROOF 1 · THE STALE FACT</div>
+  <h2>When INEC moved the election, the station had to move with it</h2>
+  <p>In February 2026 INEC fixed the presidential election for <strong>20 February 2027</strong>, then
+    revised it to <strong class="aqua">16 January 2027</strong>. The articles carrying the old date are
+    still online, and a naive summariser will happily read them out.</p>
+  <p>RAIA's verifier is tested against <strong>those real archived pages</strong>: a settled fact beats an
+    official source, which beats the later report. It must air January — and when the official source is
+    removed from the test, the later report must still win.</p>
+  <p style="color:#7ea4b7">For figures with no official source, the contradiction is marked unresolved
+    and <strong class="warm">neither number airs.</strong></p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">PROOF 2 · WHAT IT REFUSED</div>
+  <h2>A station that has thought about when not to broadcast</h2>
+  <div class="stat">
+    <div><span class="big">26</span><span>stories refused today</span></div>
+    <div><span class="big">146</span><span>refusals logged</span></div>
+    <div><span class="big">12</span><span>stories aired</span></div>
+  </div>
+  <p style="margin-top:22px"><strong>90</strong> were sensitive and need a human editor · <strong>54</strong>
+    could not be verified · one stated a fact the sources did not support · one promised a segment that
+    would not air.</p>
+  <p>Every refusal is published with its reason on the site, next to what did air. Transparency about
+    silence is the part most systems hide.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">PROOF 3 · SAFETY AND PRIVACY</div>
+  <h2>Numbers that are real, listeners who stay private</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>11 of 14 hotlines</h3>
+      <p>Each number read on air was confirmed on the agency's own page, with the date it was checked.
+        The three that failed are listed as not aired rather than guessed at.</p>
+    </div>
+    <div class="card">
+      <h3>No phone number is stored</h3>
+      <p>Listeners reach the station on WhatsApp. Numbers exist only as a salted hash; the thread
+        expires on a database TTL; a question airs only with consent, and only as a first name and a
+        city.</p>
+    </div>
+  </div>
+  <p style="margin-top:24px">The presenters are synthetic — and the station says so once an hour, in
+    every language, on every page, with no way to switch it off.</p>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">TODAY'S OUTPUT</div>
+  <h2>One laptop, one day of radio</h2>
+  <div class="stat">
+    <div><span class="big">65.7</span><span>minutes of audio</span></div>
+    <div><span class="big">9</span><span>bulletins with audio</span></div>
+    <div><span class="big">5</span><span>languages</span></div>
+    <div><span class="big">28</span><span>outlets read</span></div>
+  </div>
+  <p style="margin-top:24px">English, Hausa, Yoruba and Igbo bulletins rendered on an M1 laptop with
+    open weights (YarnGPT2). Pidgin is written, translated and gated, and publishes as text until a
+    voice model is routed in — one line of configuration.</p>
+  <img src="newsroom.png" alt="The newsroom calendar" style="margin-top:20px; height:52mm; object-fit:cover; object-position:top">
+</section>
+
+<section class="slide">
+  <div class="eyebrow">IMPACT</div>
+  <h2>What this makes possible</h2>
+  <div class="grid">
+    <div class="card">
+      <h3>A station per language, not per budget</h3>
+      <p>The marginal cost of another language is a voice model and a translation pass, not another
+        newsroom. Hausa, Yoruba and Igbo listeners get the same verified civic reporting on the same
+        day as English ones.</p>
+    </div>
+    <div class="card">
+      <h3>Accountability you can hear</h3>
+      <p>Election dates, budget figures, hotline numbers and “what you can do about it” reach people
+        who will never open a ministry PDF — with every claim traceable to the outlet that reported it.</p>
+    </div>
+    <div class="card">
+      <h3>Built to be handed over</h3>
+      <p>A community station can run this: set the clock, watch the calendar fill overnight, edit a
+        script, press Generate. No studio, no presenters, no night shift.</p>
+    </div>
+    <div class="card">
+      <h3>Honest about its limits</h3>
+      <p>No native speaker has yet signed off the Hausa, Yoruba and Igbo audio; Pidgin has no voice;
+        WhatsApp is not on a live number. All stated in the README, because a trust project that hides
+        its gaps is arguing against itself.</p>
+    </div>
+  </div>
+</section>
+
+<section class="slide">
+  <div class="eyebrow">RAIA — RADIO AI AFRICA</div>
+  <h1 style="font-size:44px">Models for language.<br>Code for facts.</h1>
+  <p class="lede" style="margin-top:10px">Everything it aired, and everything it refused, is published
+    beside it — with the source, the timestamp, and the rule that decided.</p>
+  <div class="foot">Python · FastAPI · MongoDB · Next.js · YarnGPT2 · Claude · 43 tests, including the archived-pages case</div>
+</section>
+
+</body>
+</html>
