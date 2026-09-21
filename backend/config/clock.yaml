@@ -1,0 +1,55 @@
+# The daily programme (build plan §6). The clock defines slots; the editor fills them.
+#
+# Times are local to settings.timezone (Africa/Lagos). Each block plays its slots once from its
+# start time; for the rest of the block and until the next one starts, /now loops the most recent
+# bulletin in the listener's language with a bed underneath. Never dead air. Every template opens
+# with a disclosure, so looping still discloses at least once an hour.
+#
+# budget_s is a target for the scriptwriter, never a duration: schedules come from measured audio.
+
+templates:
+  drive:
+    - {kind: station_id,  budget_s: 10}
+    - {kind: disclosure,  budget_s: 12}
+    - {kind: headlines,   budget_s: 90,  max_stories: 5}
+    - {kind: timecheck,   budget_s: 8}
+    - {kind: story,       budget_s: 150, track: accountability}
+    - {kind: tease,       budget_s: 15}
+    - {kind: bed,         budget_s: 20}
+    - {kind: story,       budget_s: 150, track: civic_info}
+    - {kind: explainer,   budget_s: 210}
+    - {kind: handover,    budget_s: 12}
+    - {kind: sport,       budget_s: 120}
+    - {kind: listener,    budget_s: 120, max_items: 3}
+    - {kind: hotlines,    budget_s: 45}
+    - {kind: station_id,  budget_s: 10}
+
+  update:
+    - {kind: station_id,  budget_s: 10}
+    - {kind: disclosure,  budget_s: 12}
+    - {kind: headlines,   budget_s: 60,  max_stories: 4}
+    - {kind: timecheck,   budget_s: 8}
+    - {kind: story,       budget_s: 120}
+    - {kind: tease,       budget_s: 15}
+    - {kind: story,       budget_s: 120, track: civic_info}
+    - {kind: handover,    budget_s: 12}
+    - {kind: sport,       budget_s: 90}
+    - {kind: hotlines,    budget_s: 45}
+    - {kind: station_id,  budget_s: 10}
+
+  local_bulletin:
+    - {kind: station_id,  budget_s: 10}
+    - {kind: disclosure,  budget_s: 12}
+    - {kind: headlines,   budget_s: 60,  max_stories: 4}
+    - {kind: story,       budget_s: 120, track: civic_info}
+    - {kind: story,       budget_s: 120}
+    - {kind: hotlines,    budget_s: 45}
+    - {kind: station_id,  budget_s: 10}
+
+blocks:
+  morning_drive:   {start: "06:00", duration_min: 90, languages: [pcm, en], presenter_primary: idera, presenter_sport: emma, template: drive}
+  hausa_bulletin:  {start: "07:30", duration_min: 20, languages: [ha], presenter_primary: hausa_female1, template: local_bulletin}
+  yoruba_bulletin: {start: "08:00", duration_min: 20, languages: [yo], presenter_primary: yoruba_female2, template: local_bulletin}
+  igbo_bulletin:   {start: "08:30", duration_min: 20, languages: [ig], presenter_primary: igbo_female1, template: local_bulletin}
+  midday_update:   {start: "13:00", duration_min: 25, languages: [pcm, en], presenter_primary: chinenye, presenter_sport: emma, template: update}
+  evening_drive:   {start: "17:00", duration_min: 60, languages: [pcm, en], presenter_primary: zainab, presenter_sport: emma, template: drive}

@@ -1,0 +1,41 @@
+[project]
+name = "backend"
+version = "0.1.0"
+description = "RAIA — Radio AI Africa: an AI-produced, source-verified civic radio station"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+dependencies = [
+    "anthropic>=1.7.0",
+    "beanie>=2.2.0",
+    "boto3>=1.43.98",
+    "fastapi>=0.141.1",
+    "feedparser>=6.0.14",
+    "httpx>=0.28.1",
+    "huggingface-hub>=1.32.0",
+    "inflect>=7.5.0",
+    "numpy>=2.5.3",
+    "openai>=3.16.2",
+    "outetts==0.2.3",
+    "pydantic-settings>=2.15.0",
+    "python-dateutil>=2.9.0.post0",
+    "pyyaml>=6.0.3",
+    "ruamel-yaml>=0.19.1",
+    "soundfile>=0.14.0",
+    "torch>=2.14.0",
+    "torchaudio>=2.11.0",
+    "trafilatura>=2.2.0",
+    "transformers>=5.17.0",
+    "uroman>=1.3.1.1",
+    "uvicorn[standard]>=0.53.0",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "pytest-asyncio>=1.4.0",
+]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+filterwarnings = ["ignore::DeprecationWarning", "ignore::FutureWarning", "ignore::UserWarning"]

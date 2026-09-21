@@ -1,0 +1,147 @@
+# Curated public hotlines. The station never invents a number: every entry below is only read on
+# air (air: true) while `uv run python -m src.hotlines --verify` finds each number's digits on the
+# source page, and verified_on records when that last passed.
+#
+# Numbers are written exactly as the source page writes them.
+
+hotlines:
+- id: emergency_112
+  service: National emergency number
+  numbers:
+  - '112'
+  purpose: Any emergency. Calls go to your state's emergency centre, which contacts police, fire, road safety or
+    ambulance.
+  source_url: https://ncc.gov.ng/node/3132
+  source_name: Nigerian Communications Commission
+  air: true
+  note: The Federal Government approved 112 as the national emergency number in April 2026 and ordered a nationwide
+    rollout plan on 8 September 2026, so response may still vary by state.
+  verified_on: '2026-09-19'
+- id: ncdc
+  service: NCDC Connect Centre
+  numbers:
+  - '6232'
+  - +234 708 711 0839
+  - +234 809 955 5577
+  purpose: Report or ask about infectious diseases. 6232 is toll-free; the second number is WhatsApp, the third
+    SMS.
+  source_url: https://ncdc.gov.ng/contact/
+  source_name: Nigeria Centre for Disease Control and Prevention
+  air: true
+  verified_on: '2026-09-19'
+- id: frsc
+  service: Federal Road Safety Corps
+  numbers:
+  - '122'
+  purpose: Road crashes and rescue. Toll-free.
+  source_url: https://frsc.gov.ng/contact-us/
+  source_name: Federal Road Safety Corps
+  air: true
+  verified_on: '2026-09-19'
+- id: inec
+  service: INEC Citizens Contact Centre
+  numbers:
+  - '4632'
+  - +234 908 444 4333
+  - +234 905 085 8629
+  purpose: Voter registration, PVC collection and election questions or complaints.
+  source_url: https://inecnigeria.org/contact
+  source_name: Independent National Electoral Commission
+  hours: 9am to 5pm, Monday to Friday; 24 hours on election days
+  air: true
+  verified_on: '2026-09-19'
+- id: nhrc
+  service: National Human Rights Commission
+  numbers:
+  - '6472'
+  - 08006472428
+  purpose: Human rights complaints, including gender-based violence. Both lines are toll-free.
+  source_url: https://www.nigeriarights.gov.ng/contact-us.html
+  source_name: National Human Rights Commission
+  hours: 8am to 4pm, Monday to Friday
+  air: true
+  verified_on: '2026-09-19'
+- id: naptip
+  service: NAPTIP (anti-human-trafficking agency)
+  numbers:
+  - '627'
+  - '07030000203'
+  purpose: Report human trafficking and violence against persons.
+  source_url: https://naptip.gov.ng/contact/
+  source_name: National Agency for the Prohibition of Trafficking in Persons
+  air: true
+  note: NAPTIP's site gives two different forms of its 0800 toll-free number, so it is not listed.
+  verified_on: '2026-09-19'
+- id: police_cru
+  service: Police Complaint Response Unit
+  numbers:
+  - 08057000001
+  - 08057000002
+  - 08057000003
+  purpose: Report police misconduct or extortion. The third number is WhatsApp and SMS.
+  source_url: https://von.gov.ng/tinted-glass-permit-police-warns-officers-against-motorist-extortion/
+  source_name: Voice of Nigeria, quoting the Nigeria Police Force spokesman (npf.gov.ng blocks automated checks)
+  air: true
+  verified_on: '2026-09-19'
+- id: nafdac
+  service: NAFDAC complaints line
+  numbers:
+  - 0800-1-623322
+  purpose: Report fake or substandard drugs, food and other regulated products.
+  source_url: https://nafdac.gov.ng/about-nafdac/contact-nafdac/
+  source_name: National Agency for Food and Drug Administration and Control
+  air: true
+  verified_on: '2026-09-19'
+- id: ncc_consumer
+  service: NCC consumer line
+  numbers:
+  - '622'
+  purpose: Escalate a phone or data complaint your network did not resolve. Toll-free.
+  source_url: https://ncc.gov.ng/about/servicom-charter/departmental-charters/consumer-affairs-bureau-service-charter
+  source_name: Nigerian Communications Commission
+  air: true
+  verified_on: '2026-09-19'
+- id: icpc
+  service: ICPC (anti-corruption commission)
+  numbers:
+  - 0800-2255-4272
+  purpose: Report corruption by public officials. Toll-free.
+  source_url: https://icpc.gov.ng/
+  source_name: Independent Corrupt Practices and Other Related Offences Commission
+  air: false
+- id: ndlea
+  service: NDLEA hotline
+  numbers:
+  - 080010203040
+  purpose: Report drug trafficking.
+  source_url: https://ndlea.gov.ng/
+  source_name: National Drug Law Enforcement Agency
+  air: true
+  verified_on: '2026-09-19'
+- id: fire_service
+  service: Federal Fire Service
+  numbers:
+  - 08032003557
+  purpose: Fire emergencies, 24 hours.
+  source_url: https://fedfire.gov.ng/contact/
+  source_name: Federal Fire Service
+  air: true
+  verified_on: '2026-09-19'
+- id: nema
+  service: National Emergency Management Agency
+  numbers:
+  - 080022556362
+  purpose: Floods, building collapses and other disasters.
+  source_url: https://nema.gov.ng/0800callnema/
+  source_name: National Emergency Management Agency
+  air: false
+  note: The official page shows the number only inside a 2014 image; newspapers quote it from NEMA statements.
+- id: efcc
+  service: EFCC hotline
+  numbers:
+  - +234 809 332 2644
+  purpose: Report financial crimes.
+  source_url: https://www.efcc.gov.ng/
+  source_name: Economic and Financial Crimes Commission
+  air: false
+  note: The site renders its numbers with JavaScript, so the page text cannot be checked automatically.

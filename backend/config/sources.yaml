@@ -1,0 +1,443 @@
+# Outlet registry (build plan §8).
+#
+# tier:     SourceRef tier used by the verifier (official > wire/national > local/community;
+#           factcheck contradicts everything else).
+# category: which desk the source feeds: official, news, native, factcheck, accountability,
+#           sport, pan_african.
+# owner:    for independence checks. Two outlets under one owner do not corroborate each other
+#           (all BBC services are one owner; Premium Times and its Hausa edition are one owner;
+#           ICIR and FactCheckHub are one owner).
+# feeds:    RSS/Atom URLs, the primary path. `scrape` is the fallback for sources without a feed.
+#
+# `uv run python -m src.ingest.registry --verify` checks every feed and scrape target.
+# Sources that fail verification are moved to `dropped:` at the end with the reason.
+
+sources:
+- id: inec
+  outlet: INEC
+  homepage: https://inecnigeria.org
+  tier: official
+  category: official
+  region: national
+  language: en
+  owner: INEC
+  feeds: []
+  scrape:
+    type: html
+    url: https://inecnigeria.org/press
+    link_pattern: inecnigeria\.org/press/[a-z0-9-]+$
+    fields: {}
+    dayfirst: false
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: scrape
+- id: cbn
+  outlet: CBN
+  homepage: https://www.cbn.gov.ng
+  tier: official
+  category: official
+  region: national
+  language: en
+  owner: CBN
+  feeds: []
+  scrape:
+    type: json_api
+    url: https://www.cbn.gov.ng/api/GetAllPressReleases
+    base_url: https://www.cbn.gov.ng
+    fields:
+      title: title
+      summary: keywords
+      link: link
+      date: documentDate
+    dayfirst: true
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: scrape
+- id: premiumtimes
+  outlet: Premium Times
+  homepage: https://www.premiumtimesng.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Premium Times Services Ltd
+  feeds:
+  - https://www.premiumtimesng.com/feed
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: punch
+  outlet: Punch
+  homepage: https://punchng.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Punch Nigeria Ltd
+  feeds:
+  - https://punchng.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: vanguard
+  outlet: Vanguard
+  homepage: https://www.vanguardngr.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Vanguard Media Ltd
+  feeds:
+  - https://www.vanguardngr.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: dailypost
+  outlet: Daily Post
+  homepage: https://dailypost.ng
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Daily Post Media Ltd
+  feeds:
+  - https://dailypost.ng/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: channelstv
+  outlet: Channels TV
+  homepage: https://www.channelstv.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Channels Incorporated
+  feeds:
+  - https://www.channelstv.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: dailytrust
+  outlet: Daily Trust
+  homepage: https://dailytrust.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Media Trust Ltd
+  feeds:
+  - https://dailytrust.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: businessday
+  outlet: BusinessDay
+  homepage: https://businessday.ng
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: BusinessDay Media Ltd
+  feeds:
+  - https://businessday.ng/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: pmnews
+  outlet: PM News
+  homepage: https://pmnewsnigeria.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: Independent Communications Network Ltd
+  feeds:
+  - https://pmnewsnigeria.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: tribune
+  outlet: Nigerian Tribune
+  homepage: https://tribuneonlineng.com
+  tier: national
+  category: news
+  region: national
+  language: en
+  owner: African Newspapers of Nigeria Plc
+  feeds:
+  - https://tribuneonlineng.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_hausa
+  outlet: BBC Hausa
+  homepage: https://www.bbc.com/hausa
+  tier: national
+  category: native
+  region: national
+  language: ha
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/hausa/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_yoruba
+  outlet: BBC Yoruba
+  homepage: https://www.bbc.com/yoruba
+  tier: national
+  category: native
+  region: national
+  language: yo
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/yoruba/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_igbo
+  outlet: BBC Igbo
+  homepage: https://www.bbc.com/igbo
+  tier: national
+  category: native
+  region: national
+  language: ig
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/igbo/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_pidgin
+  outlet: BBC Pidgin
+  homepage: https://www.bbc.com/pidgin
+  tier: national
+  category: native
+  region: national
+  language: pcm
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/pidgin/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_swahili
+  outlet: BBC Swahili
+  homepage: https://www.bbc.com/swahili
+  tier: national
+  category: native
+  region: africa
+  language: sw
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/swahili/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: premiumtimes_hausa
+  outlet: Premium Times Hausa
+  homepage: https://hausa.premiumtimesng.com
+  tier: national
+  category: native
+  region: national
+  language: ha
+  owner: Premium Times Services Ltd
+  feeds:
+  - https://hausa.premiumtimesng.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: dubawa
+  outlet: Dubawa
+  homepage: https://dubawa.org
+  tier: factcheck
+  category: factcheck
+  region: national
+  language: en
+  owner: CJID
+  feeds:
+  - https://dubawa.org/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: factcheckhub
+  outlet: FactCheckHub
+  homepage: https://factcheckhub.com
+  tier: factcheck
+  category: factcheck
+  region: national
+  language: en
+  owner: ICIR
+  feeds:
+  - https://factcheckhub.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: dataphyte
+  outlet: Dataphyte
+  homepage: https://www.dataphyte.com
+  tier: national
+  category: accountability
+  region: national
+  language: en
+  owner: Dataphyte
+  feeds:
+  - https://www.dataphyte.com/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: icir
+  outlet: ICIR
+  homepage: https://www.icirnigeria.org
+  tier: national
+  category: accountability
+  region: national
+  language: en
+  owner: ICIR
+  feeds:
+  - https://www.icirnigeria.org/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: completesports
+  outlet: Complete Sports
+  homepage: https://www.completesports.com
+  tier: national
+  category: sport
+  region: national
+  language: en
+  owner: Complete Communications Ltd
+  feeds:
+  - https://www.completesports.com/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: soccernet
+  outlet: Soccernet NG
+  homepage: https://soccernet.ng
+  tier: national
+  category: sport
+  region: national
+  language: en
+  owner: Soccernet NG
+  feeds:
+  - https://soccernet.ng/feed/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: bbc_sport_africa
+  outlet: BBC Sport Africa
+  homepage: https://www.bbc.com/sport/africa
+  tier: national
+  category: sport
+  region: africa
+  language: en
+  owner: BBC
+  feeds:
+  - https://feeds.bbci.co.uk/sport/africa/rss.xml
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: allafrica_ng
+  outlet: AllAfrica
+  homepage: https://allafrica.com/nigeria/
+  tier: wire
+  category: pan_african
+  region: national
+  language: en
+  owner: AllAfrica Global Media
+  feeds:
+  - https://allafrica.com/tools/headlines/rdf/nigeria/headlines.rdf
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: africanews
+  outlet: Africanews
+  homepage: https://www.africanews.com
+  tier: wire
+  category: pan_african
+  region: africa
+  language: en
+  owner: Euronews
+  feeds: []
+  scrape:
+    type: html
+    url: https://www.africanews.com/
+    link_pattern: africanews\.com/20\d\d/\d\d/\d\d/[a-z0-9-]+/?$
+    fields: {}
+    dayfirst: false
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: scrape
+- id: thecontinent
+  outlet: The Continent
+  homepage: https://www.thecontinent.org
+  tier: wire
+  category: pan_african
+  region: africa
+  language: en
+  owner: The Continent
+  feeds:
+  - https://continent.substack.com/feed
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+- id: mg
+  outlet: Mail & Guardian
+  homepage: https://mg.co.za
+  tier: wire
+  category: pan_african
+  region: africa
+  language: en
+  owner: M&G Media
+  feeds:
+  - https://mg.co.za/atom/
+  robots_ok: true
+  verified_on: '2026-09-19'
+  method: feed
+dropped:
+- id: thecable
+  outlet: TheCable
+  reason: 'https://www.thecable.ng/feed: HTTP 403'
+  checked_on: '2026-09-19'
+  tried:
+  - https://www.thecable.ng/feed
+- id: guardianng
+  outlet: The Guardian Nigeria
+  reason: 'https://guardian.ng/feed/: HTTP 403'
+  checked_on: '2026-09-19'
+  tried:
+  - https://guardian.ng/feed/
+- id: voa_hausa
+  outlet: VOA Hausa
+  reason: 'https://www.voahausa.com/api/: 20 items, newest 2025-03-31; https://www.voahausa.com/sitemap.xml: no items (empty)'
+  checked_on: '2026-09-19'
+  tried:
+  - https://www.voahausa.com/api/
+  - https://www.voahausa.com/sitemap.xml
+- id: africacheck
+  outlet: Africa Check
+  reason: 'https://africacheck.org/rss.xml: HTTP 403; https://africacheck.org/feed: HTTP 403'
+  checked_on: '2026-09-19'
+  tried:
+  - https://africacheck.org/rss.xml
+  - https://africacheck.org/feed
+- id: budgit
+  outlet: BudgIT
+  reason: 'https://budgit.org/feed/: 10 items, newest 2026-08-19'
+  checked_on: '2026-09-19'
+  tried:
+  - https://budgit.org/feed/
+- id: fij
+  outlet: FIJ
+  reason: 'https://fij.ng/feed/: HTTP 403'
+  checked_on: '2026-09-19'
+  tried:
+  - https://fij.ng/feed/
+- id: ncdc
+  outlet: NCDC
+  reason: 'https://ncdc.gov.ng/news/press: 6 dated articles, newest 2026-05-31'
+  checked_on: '2026-09-19'
+  tried:
+  - https://ncdc.gov.ng/news/press

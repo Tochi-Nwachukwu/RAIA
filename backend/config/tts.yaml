@@ -1,0 +1,19 @@
+# Which text-to-speech engine speaks each language. render.py reads this; the pipeline never calls a
+# TTS engine directly.
+#
+# YarnGPT (src/speech) speaks Nigerian-accented English, Hausa, Yoruba and Igbo. Nigerian Pidgin and
+# Swahili go to the placeholder engine, which renders nothing: their bulletins are still written,
+# translated and gated, and publish as text until a model is routed in. To add one, implement an
+# engine in src/audio/render.py (ENGINES) and point the language at it here.
+
+routes:
+  en:  {engine: yarngpt, language: english}
+  ha:  {engine: yarngpt, language: hausa}
+  yo:  {engine: yarngpt, language: yoruba}
+  ig:  {engine: yarngpt, language: igbo}
+  pcm: {engine: placeholder, note: No TTS model is routed for Nigerian Pidgin yet.}
+  sw:  {engine: placeholder, note: No TTS model is routed for Swahili yet.}
+
+# Devices for YarnGPT worker processes, one process per entry. "mps" is the Apple GPU; two workers
+# (mps and cpu) roughly halve render time on an M1.
+yarngpt_devices: [mps, cpu]

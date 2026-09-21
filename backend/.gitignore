@@ -1,0 +1,7 @@
+.venv/
+__pycache__/
+.env
+.pytest_cache/
+# Model and HTTP caches, TTS audio and run outputs are reproducible and large.
+.cache/
+runs/

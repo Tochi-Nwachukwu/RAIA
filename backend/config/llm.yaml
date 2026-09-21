@@ -1,0 +1,36 @@
+# Which provider serves RAIA's model calls, and which model serves each tier.
+# Only src/llm.py reads this file and imports provider SDKs.
+#
+# Tiers (build plan §5): cheap for high-volume extraction, expensive only where judgement is needed.
+provider: anthropic
+
+providers:
+  anthropic:
+    sdk: anthropic
+    # Vercel AI Gateway speaks the native Anthropic Messages API. Remove base_url and set
+    # api_key_env: ANTHROPIC_API_KEY to call api.anthropic.com directly.
+    base_url: https://ai-gateway.vercel.sh
+    api_key_env: AI_GATEWAY_API_KEY
+    # Each tier lists models in order of preference. llm.py moves to the next model when one
+    # refuses (the gateway rejects Anthropic's server-side refusal fallback) or is unavailable:
+    # in September 2026 the gateway answered claude-opus-5 with "429 No access to this model".
+    tiers:
+      cheap: [claude-haiku-4-5]
+      mid: [claude-sonnet-5]
+      expensive: [claude-opus-5, claude-opus-4-8]
+    max_concurrency: 6
+
+  openai:
+    sdk: openai
+    api_key_env: OPENAI_API_KEY
+    tiers:
+      cheap: [gpt-5-mini]
+      mid: [gpt-5.4-mini]
+      expensive: [gpt-5.4]
+    max_concurrency: 6
+
+# Used to cluster stories. The extractor writes every story's headline and summary in English, so
+# clustering works across source languages even though these embeddings are weak cross-lingually.
+embeddings:
+  api_key_env: OPENAI_API_KEY
+  model: text-embedding-3-small

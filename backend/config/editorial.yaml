@@ -1,0 +1,152 @@
+# Editorial rules (build plan §9). Enforced by the editor, vetoed by the safety gate.
+# A system that has thought about when *not* to broadcast is a serious system.
+
+always:
+- Attribute claims. "The minister said X", never "X".
+- Never air an unverified casualty figure.
+- Never attribute blame to an ethnic or religious group in an unverified incident.
+- Never name a suspect who has not been charged.
+- Anything sensitive requires human review before synthesis. No exceptions, no override flag.
+- If corroboration fails, the station says so on air.
+
+# Said on air, verbatim, whenever a story rests on a single outlet.
+single_source_disclaimer: >-
+  We have seen this reported by one outlet only and have not been able to confirm it.
+
+election:
+  rules:
+  - Never project, call, or speculate on a result.
+  - Results, turnout and registration figures come from INEC (official tier) only.
+  - Campaign claims are attributed, never corroborated. A party saying a thing is evidence the party said it, 
+    nothing more.
+  - Track airtime by party across each block and log it. Imbalance is a bug.
+  - No personal attacks on candidates. No ethnic or religious framing of candidates.
+  - Violence at a campaign event is sensitive and goes to human review.
+  - Voter education is the backbone and is always safe to air.
+  parties: [APC, PDP, LP, NNPP, ADC, APGA, SDP, YPP, ADP, PRP, AA, ZLP, NDC]
+  # Airtime share above which one party's lead over the next is logged as an imbalance.
+  imbalance_ratio: 2.0
+
+# Facts the desk treats as settled. A source that disagrees loses, and the contradiction is logged
+# (this is how Test Case #1 catches articles that still carry INEC's superseded dates).
+# `source_verified` says whether the pipeline confirmed the source page itself; seeds from the
+# build plan that no page has confirmed yet are used for context, never to overrule a source.
+known_facts:
+- subject: 2027 presidential and National Assembly election date
+  value: "2027-01-16"
+  spoken: Saturday the sixteenth of January, twenty twenty-seven
+  supersedes: ["2027-02-20"]
+  source: INEC election calendar
+  source_url: https://inecnigeria.org/elections/calendar
+  source_verified: true
+  verified_on: "2026-09-19"
+- subject: 2027 governorship and State Houses of Assembly election date
+  value: "2027-02-06"
+  spoken: Saturday the sixth of February, twenty twenty-seven
+  supersedes: ["2027-03-06"]
+  source: INEC election calendar
+  source_url: https://inecnigeria.org/elections/calendar
+  source_verified: true
+  verified_on: "2026-09-19"
+- subject: INEC election timetable revision
+  value: "2026-02-26"
+  spoken: INEC revised the timetable on the twenty-sixth of February, twenty twenty-six
+  source: INEC press release, 26 February 2026 (image-only page; archived)
+  source_url: 
+    http://web.archive.org/web/20260817173158/https://www.inecnigeria.org/revised-timetable-and-schedule-of-activities-for-the-2027-general-elections-and-rescheduling-of-osun-state-governorship-election/
+  source_verified: false
+- subject: Electoral Act in force
+  value: Electoral Act 2026
+  spoken: the Electoral Act twenty twenty-six, which replaced the 2022 Act
+  source: State House, 19 February 2026 (President signed the new act on 18 February 2026)
+  source_url: 
+    https://statehouse.gov.ng/president-tinubu-signs-amended-electoral-act-commits-to-strengthening-democracy/
+  source_verified: false
+- subject: presidential and National Assembly campaigns start
+  value: "2026-08-19"
+  spoken: the nineteenth of August, twenty twenty-six
+  source: INEC revised timetable of 26 February 2026, as reported by Voice of Nigeria (federal broadcaster)
+  source_url: https://von.gov.ng/inec-issues-revised-timetable-for-2027-general-election/
+  source_verified: true
+  verified_on: '2026-09-19'
+- subject: governorship and State Assembly campaigns start
+  value: "2026-09-09"
+  spoken: the ninth of September, twenty twenty-six
+  source: INEC revised timetable of 26 February 2026, as reported by Voice of Nigeria (federal broadcaster)
+  source_url: https://von.gov.ng/inec-issues-revised-timetable-for-2027-general-election/
+  source_verified: true
+  verified_on: '2026-09-19'
+- subject: presidential and National Assembly campaigns end
+  value: "2027-01-14"
+  spoken: the fourteenth of January, twenty twenty-seven
+  source: RAIA build plan seed
+  source_verified: false
+- subject: governorship and State Assembly campaigns end
+  value: "2027-02-04"
+  spoken: the fourth of February, twenty twenty-seven
+  source: RAIA build plan seed
+  source_verified: false
+- subject: party primaries window
+  value: 2026-04-23 to 2026-05-30
+  spoken: from the twenty-third of April to the thirtieth of May, twenty twenty-six
+  source: RAIA build plan seed
+  source_verified: false
+- subject: register of voters publication
+  value: "2026-12-15"
+  spoken: the fifteenth of December, twenty twenty-six
+  source: RAIA build plan seed
+  source_verified: false
+- subject: notice of poll
+  value: "2026-12-29"
+  spoken: the twenty-ninth of December, twenty twenty-six
+  source: RAIA build plan seed
+  source_verified: false
+- subject: Continuous Voter Registration period
+  value: 2026-04 to 2027-01
+  spoken: from April twenty twenty-six to January twenty twenty-seven
+  source: RAIA build plan seed
+  source_verified: false
+
+# Election milestones continuity mentions on the day (and the days before).
+milestones:
+- {date: "2026-08-19", name: presidential and National Assembly campaigns open}
+- {date: "2026-09-09", name: governorship and State Assembly campaigns open}
+- {date: "2026-12-15", name: register of voters published}
+- {date: "2026-12-29", name: notice of poll}
+- {date: "2027-01-14", name: presidential and National Assembly campaigns end}
+- {date: "2027-01-16", name: presidential and National Assembly elections}
+- {date: "2027-02-04", name: governorship and State Assembly campaigns end}
+- {date: "2027-02-06", name: governorship and State Assembly elections}
+
+# Calendar awareness for continuity. Movable Islamic dates are announced by the Sultan of Sokoto,
+# so they are listed as expected, not fixed.
+public_holidays:
+- {date: "2026-10-01", name: Independence Day}
+- {date: "2026-12-25", name: Christmas Day}
+- {date: "2026-12-26", name: Boxing Day}
+- {date: "2027-01-01", name: New Year's Day}
+- {date: "2026-06-12", name: Democracy Day}
+ramadan:
+- {year: 2027, expected_start: "2027-02-08", expected_end: "2027-03-09"}
+
+# Voter education: always safe to air. Each line is read on air only while `uv run python -m
+# src.editorial --verify` finds its `check` phrases on the INEC page it cites.
+voter_education:
+- text: >-
+    INEC's voter registration and PVC portal lets you check your registration status, find where to
+    collect your Permanent Voter Card, and register online.
+  source_url: https://inecnigeria.org
+  check: ["Verify registration status", "PVC collection centers", "register online"]
+  verified_on:
+- text: >-
+    INEC's Citizens Contact Centre answers voters on the short code four six three two, from nine in the
+    morning to five in the evening on weekdays, and around the clock on election days.
+  source_url: https://inecnigeria.org/contact
+  check: ["4632", "9:00 AM - 5:00 PM", "24/7 on Election Days"]
+  verified_on: '2026-09-19'
+- text: >-
+    The presidential and National Assembly elections hold on Saturday the sixteenth of January, twenty
+    twenty-seven. Governorship and State Assembly elections follow on Saturday the sixth of February.
+  source_url: https://inecnigeria.org/elections/calendar
+  check: ["January 16, 2027", "February 6, 2027"]
+  verified_on: '2026-09-19'
