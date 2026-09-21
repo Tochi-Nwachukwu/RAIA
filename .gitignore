@@ -1,0 +1,3 @@
+.DS_Store
+# The static site the Next.js app replaced; kept locally as a fallback, not part of the project.
+frontend-legacy/
